@@ -1,15 +1,6 @@
 
 "use strict";
 
-// ========================================
-// 1. YOUR DONATION DETAILS
-// ========================================
-
-// Replace these with your real details later.
-const ACCOUNT_NAME = "Blessing Odey";
-const BANK_NAME = "Access Bank";
-const ACCOUNT_NUMBER = "1452437529";
-
 
 // ========================================
 // 2. GET HTML ELEMENTS
@@ -21,12 +12,6 @@ const successScreen = document.getElementById("successScreen");
 const noButton = document.getElementById("noButton");
 const yesButton = document.getElementById("yesButton");
 const reaction = document.getElementById("reaction");
-
-const accountName = document.getElementById("accountName");
-const bankName = document.getElementById("bankName");
-const accountNumber = document.getElementById("accountNumber");
-
-const copyAccountButton = document.getElementById("copyAccountButton");
 
 let noAttempts = 0;
 let lastDodgeTime = 0;
@@ -192,59 +177,56 @@ function launchConfetti() {
   }
 }
 
-// ========================================
-// 5. YES BUTTON: SHOW THE RESCUE FUND
-// ========================================
+
+ // ========================================
+ // 5. YES BUTTON: SHOW THE RESCUE FUND
+ // ========================================
 
 yesButton.addEventListener("click", () => {
   questionScreen.hidden = true;
   successScreen.hidden = false;
 
-  // Fill in the donation details.
-  accountName.textContent = ACCOUNT_NAME;
-  bankName.textContent = BANK_NAME;
-  accountNumber.textContent = ACCOUNT_NUMBER;
-
-  // Configure Paystack only when a real link is supplied.
-  if (PAYSTACK_LINK.trim()) {
-    paystackButton.href = PAYSTACK_LINK;
-    paystackButton.target = "_blank";
-  } else {
-    paystackButton.removeAttribute("href");
-    paystackButton.removeAttribute("target");
-  }
-
   window.scrollTo({ top: 0, behavior: "smooth" });
   launchConfetti();
 });
 
-// ========================================
-// 6. COPY ACCOUNT NUMBER
-// ========================================
 
-copyAccountButton.addEventListener("click", async () => {
-  try {
-    await navigator.clipboard.writeText(ACCOUNT_NUMBER);
-    copyAccountButton.textContent = "✅ Account number copied!";
-  } catch (error) {
-    // Fallback for browsers that block clipboard access.
-    const temporaryInput = document.createElement("textarea");
-    temporaryInput.value = ACCOUNT_NUMBER;
-    temporaryInput.style.position = "fixed";
-    temporaryInput.style.opacity = "0";
+/* ========================================
+   COPY INDIVIDUAL BANK ACCOUNT NUMBERS
+======================================== */
 
-    document.body.appendChild(temporaryInput);
-    temporaryInput.select();
+document.querySelectorAll(".copy-account-button").forEach((button) => {
+  button.addEventListener("click", async () => {
+    const accountNumber = button.dataset.accountNumber;
+    const originalText = button.textContent;
 
-    const copied = document.execCommand("copy");
-    temporaryInput.remove();
+    try {
+      await navigator.clipboard.writeText(accountNumber);
+    } catch (error) {
+      // Fallback for browsers that block clipboard access.
+      const temporaryInput = document.createElement("textarea");
+      temporaryInput.value = accountNumber;
+      temporaryInput.style.position = "fixed";
+      temporaryInput.style.opacity = "0";
 
-    copyAccountButton.textContent = copied
-      ? "✅ Account number copied!"
-      : "Please copy the number above manually";
-  }
+      document.body.appendChild(temporaryInput);
+      temporaryInput.select();
 
-  window.setTimeout(() => {
-    copyAccountButton.textContent = "📋 Copy account number";
-  }, 2500);
+      const copied = document.execCommand("copy");
+      temporaryInput.remove();
+
+      if (!copied) {
+        alert("Please copy this account number manually: " + accountNumber);
+        return;
+      }
+    }
+
+    button.textContent = "✓";
+    button.setAttribute("aria-label", "Account number copied");
+
+    window.setTimeout(() => {
+      button.textContent = originalText;
+      button.setAttribute("aria-label", "Copy account number");
+    }, 2000);
+  });
 });

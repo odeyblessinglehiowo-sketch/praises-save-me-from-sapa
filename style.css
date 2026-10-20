@@ -645,3 +645,131 @@ body {
     font-size: 0.85rem;
   }
 }
+
+
+
+/* Multiple bank accounts table */
+.accounts-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+  border: 1px solid #f5c1d4;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.accounts-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+
+.accounts-table th {
+  padding: 14px 12px;
+  background: #ffe8f1;
+  color: #8d2853;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.accounts-table td {
+  padding: 14px 12px;
+  border-top: 1px solid #f8dce7;
+  color: #49333d;
+  vertical-align: middle;
+}
+
+.accounts-table tbody tr:nth-child(even) {
+  background: #fff8fb;
+}
+
+.account-number-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.copy-account-button {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  min-height: 34px;
+  padding: 6px;
+  border: 1px solid #f3b5ce;
+  border-radius: 9px;
+  background: #fff0f6;
+  color: #a12c5d;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.copy-account-button:hover {
+  background: #ffd9e8;
+  transform: translateY(-1px);
+}
+
+.copy-account-button:focus-visible {
+  outline: 2px solid #d63384;
+  outline-offset: 3px;
+}
+
+.table-hint {
+  margin-top: 12px;
+  color: #8d6475;
+  font-size: 12px;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .accounts-table {
+    font-size: 12px;
+  }
+
+  .accounts-table th,
+  .accounts-table td {
+    padding: 11px 8px;
+  }
+}
+
+
+/* WALLET ACCOUNT SECTION */
+.wallet-section {
+  margin-top: 24px;
+  padding: 20px 16px;
+  border: 1px dashed #e9a4c0;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #fff0f6, #fff8fb);
+  text-align: center;
+}
+
+.wallet-icon {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+.wallet-section h4 {
+  margin: 0 0 10px;
+  color: #8d2853;
+  font-size: 16px;
+}
+
+.wallet-section p {
+  margin: 0;
+  color: #654454;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.wallet-note {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #fff;
+  color: #a12c5d;
+  font-size: 12px;
+  font-weight: 600;
+}
