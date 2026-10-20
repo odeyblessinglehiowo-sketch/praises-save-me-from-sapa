@@ -10,8 +10,6 @@ const ACCOUNT_NAME = "Blessing Odey";
 const BANK_NAME = "Access Bank";
 const ACCOUNT_NUMBER = "1452437529";
 
-const PAYSTACK_LINK = "https://paystack.shop/pay/save-me-from-sapa";
-
 
 // ========================================
 // 2. GET HTML ELEMENTS
@@ -29,7 +27,6 @@ const bankName = document.getElementById("bankName");
 const accountNumber = document.getElementById("accountNumber");
 
 const copyAccountButton = document.getElementById("copyAccountButton");
-const paystackButton = document.getElementById("paystackButton");
 
 let noAttempts = 0;
 let lastDodgeTime = 0;
@@ -250,15 +247,4 @@ copyAccountButton.addEventListener("click", async () => {
   window.setTimeout(() => {
     copyAccountButton.textContent = "📋 Copy account number";
   }, 2500);
-});
-
-// ========================================
-// 7. PAYSTACK BUTTON PLACEHOLDER
-// ========================================
-
-paystackButton.addEventListener("click", (event) => {
-  if (!PAYSTACK_LINK.trim()) {
-    event.preventDefault();
-    alert("The Paystack donation link hasn't been added yet. 💗");
-  }
 });
